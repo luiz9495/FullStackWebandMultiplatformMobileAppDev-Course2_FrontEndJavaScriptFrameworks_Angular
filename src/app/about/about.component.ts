@@ -22,9 +22,5 @@ export class AboutComponent implements OnInit {
   onSelect(leader: Leader) {
     this.selectedLeader = leader;
   }
-//  constructor() { }
-
-//  ngOnInit() {
-  }
 
 }
