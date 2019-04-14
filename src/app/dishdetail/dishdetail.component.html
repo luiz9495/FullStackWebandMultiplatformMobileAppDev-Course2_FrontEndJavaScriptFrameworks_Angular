@@ -13,7 +13,7 @@
           <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
         </mat-card-title>
       </mat-card-header>
-     <img mat-card-image src={{dish.image}} alt={{dish.name}}>
+     <img mat-card-image src="{{ BaseURL + dish.image}}" alt={{dish.name}}>
      <mat-card-content>
        <p>{{dish.description}}
        </p>
@@ -45,7 +45,7 @@
         <p matLine><span> -- {{item.author}} {{item.date | date}}</span></p>
       </mat-list-item>
 
-      <form novalidate [formGroup]="commentForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+      <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
 
         <mat-list-item *ngIf="commentForm.valid">
           <p matLine> {{ commentForm.value.comment }}</p>

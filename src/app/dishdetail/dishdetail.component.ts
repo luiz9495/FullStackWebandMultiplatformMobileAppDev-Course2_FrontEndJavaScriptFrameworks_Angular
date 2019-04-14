@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Dish } from '../shared/dish';
@@ -14,8 +14,6 @@ import { Comment } from '../shared/comment';
   styleUrls: ['./dishdetail.component.scss']
 })
 export class DishdetailComponent implements OnInit {
-
-  @ViewChild('fform') commentFormDirective;
 
   formErrors = {
     'author': '',
@@ -36,14 +34,15 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
-
+  @ViewChild('cform') commentFormDirective;
   commentForm: FormGroup;
   comment: Comment;
 
   constructor(private dishService: DishService,
     private route: ActivatedRoute,
     private location: Location,
-    private fb2: FormBuilder) {
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) {
       this.createForm();
     }
 
@@ -66,9 +65,9 @@ export class DishdetailComponent implements OnInit {
   }
 
   createForm() {
-    this.commentForm = this.fb2.group({
+    this.commentForm = this.fb.group({
       author: ['', [Validators.required, Validators.minLength(2)]],
-      rating: [5, Validators.required ],
+      rating: 5,
       comment: ['', Validators.required]
     });
 
