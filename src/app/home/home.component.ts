@@ -11,7 +11,7 @@ import { flyInOut, expand } from '../animations/app.animation';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
   host: {
     '[@flyInOut]': 'true',
     'style': 'display: block;'
@@ -26,7 +26,9 @@ export class HomeComponent implements OnInit {
   dish: Dish;
   dishErrMess: string;
   promotion: Promotion;
+  promotionErrMess: string;
   leader: Leader;
+  leaderErrMess: string;
 
   constructor(private dishservice: DishService,
     private promotionservice: PromotionService,
@@ -38,10 +40,14 @@ export class HomeComponent implements OnInit {
     this.dishservice.getFeaturedDish()
       .subscribe(dish => this.dish = dish,
         errmess => this.dishErrMess = <any>errmess);
+
     this.promotionservice.getFeaturedPromotion()
-      .subscribe((promotion) => this.promotion = promotion);
+      .subscribe((promotion) => this.promotion = promotion,
+      errmess => this.promotionErrMess = <any>errmess);
+
     this.leaderservice.getFeaturedLeader()
-      .subscribe((leader) => this.leader = leader);
+      .subscribe((leader) => this.leader = leader,
+      errmess => this.leaderErrMess = <any>errmess);
   }
 
 }
